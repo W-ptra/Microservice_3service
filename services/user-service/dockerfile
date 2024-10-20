@@ -20,4 +20,4 @@ WORKDIR /app
 
 RUN chmod +x /main
 
-ENTRYPOINT ["/main"]
+ENTRYPOINT ["/bin/sh", "-c", "sleep 5 && /main"] 

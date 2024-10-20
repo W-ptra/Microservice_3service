@@ -1,0 +1,99 @@
+version: '3.8'
+
+networks:
+  user_network:
+    driver: bridge
+  listing_network:
+    driver: bridge
+  public_network:
+    driver: bridge
+
+services:
+  # User Database
+  user_db:
+    image: postgres
+    container_name: user_db_container
+    environment:
+      POSTGRES_DB: user_service_db
+      POSTGRES_USER: user_service
+      POSTGRES_PASSWORD: user
+    networks:
+      - user_network
+    ports:
+      - "9000:5432"
+
+  # Listing Database
+  listing_db:
+    image: postgres
+    container_name: listing_db_container
+    environment:
+      POSTGRES_DB: listing_service_db
+      POSTGRES_USER: listing_service
+      POSTGRES_PASSWORD: listing
+    networks:
+      - listing_network
+    ports:
+      - "9001:5432"
+
+  # User Service
+  user_service:
+    image: wisnup001binus/microservice_3service_user:1.0
+    container_name: user_service_container
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8001"
+      DB_HOST: user_db
+      DB_PORT: "5432"
+      DB_USER: user_service
+      DB_PASSWORD: user
+      DB_NAME: user_service_db
+      DB_SSLMODE: disable
+    networks:
+      - user_network
+      - public_network
+    ports:
+      - "8001:8001"
+    depends_on:
+      - user_db
+
+  # Listing Service
+  listing_service:
+    image: wisnup001binus/microservice_3service_listing:1.0
+    container_name: listing_service_container
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8002"
+      DB_HOST: listing_db
+      DB_PORT: "5432"
+      DB_USER: listing_service
+      DB_PASSWORD: listing
+      DB_NAME: listing_service_db
+      DB_SSLMODE: disable
+    networks:
+      - listing_network
+      - public_network
+    ports:
+      - "8002:8002"
+    depends_on:
+      - listing_db
+
+  # Public Layer Service
+  public_layer:
+    image: wisnup001binus/microservice_3service_public_layer:1.0
+    container_name: public_layer_container
+    networks:
+      - public_network
+      - user_network
+      - listing_network
+    ports:
+      - "8000:8000"
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8000"
+      USER_SERVICE_HOST: http://user_service
+      USER_SERVICE_PORT: "8001"
+      LISTING_SERVICE_HOST: http://listing_service
+      LISTING_SERVICE_PORT: "8002"
+    depends_on:
+      - user_service
+      - listing_service

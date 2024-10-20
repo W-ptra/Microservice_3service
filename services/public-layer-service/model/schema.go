@@ -19,6 +19,11 @@ type UserRespond struct{
 	User  User 		`json:"user"`
 }
 
+type UsersRespond struct{
+	Result bool			`json:"result"`
+	User  []User 		`json:"users"`
+}
+
 type Listing struct {
 	Id        	int       		`json:"id"` 
 	UserId    	int				`json:"userId"`
@@ -33,9 +38,13 @@ type ListingRespond struct{
 	Listing []Listing 	`json:"listing"`
 }
 
+type ListingCreateRespond struct{
+	Result bool			`json:"result"`
+	Listing Listing 	`json:"listing"`
+}
+
 type ListingWithUser struct {
 	Id        	int       		`json:"id"` 
-	UserId    	int				`json:"userId"`
 	Price	  	int				`json:"price"`
 	ListingType string			`json:"listingType"`
 	User 		User			`json:"user"`

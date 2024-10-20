@@ -14,4 +14,10 @@ FROM alpine:latest
 
 COPY --from=build /app/main /main
 
-ENTRYPOINT ["/main"]
+COPY --from=build /app/.env /app/.env
+
+WORKDIR /app
+
+RUN chmod +x /main 
+
+ENTRYPOINT ["/bin/sh", "-c", "sleep 5 && /main"] 

@@ -49,7 +49,6 @@ func GetListings(c *fiber.Ctx) error{
 		}
 		userId = num
 	}
-
 	listingList,err := model.GetAllListing(pageNum,pageSize,userId)
 
 	if err!=nil && err.Error() == "record not found" || len(listingList) == 0{

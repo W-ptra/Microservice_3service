@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"log"
 	"strconv"
 	"github.com/W-ptra/microservice_3service/user-service/model"
 	"github.com/gofiber/fiber/v2"
@@ -74,7 +73,6 @@ func GetUserById(c *fiber.Ctx) error{
 	}
 
 	user,err := model.GetUserById(id)
-	log.Println(err,id)
 	if err !=nil || user.Id == 0{
 		return c.Status(404).JSON(fiber.Map{
 			"result":false,
