@@ -3,8 +3,8 @@ A microservice system consisting 3 services: ``public-layer-service``,``user-ser
 # High Level Overview
 ![img](https://drive.google.com/uc?export=view&id=1-bLq2BL6tLA0KJL7Hf3zGi81_23jdjyu)  
 # Prerequiste
-1. Have ``Golang version 1.23.2`` installed on your device
-2. Have ``Docker` installed on your device
+1. Have ``Golang`` min ``version 1.23.2`` or higher installed on your device
+2. Have ``Docker`` installed on your device
 # Usage
 1. clone this repository and cd to ``Microservice_3service``
 ```
