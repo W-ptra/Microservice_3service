@@ -14,9 +14,9 @@ func Run(){
 	app := fiber.New()
 
 	app.Use(logger.New())
-	app.Post("/users",controller.PostUser)
-	app.Get("/listing",controller.GetListings)
-	app.Post("/listing",controller.PostListings)
+	app.Post("/public-api/users",controller.PostUser)
+	app.Get("/public-api/listing",controller.GetListings)
+	app.Post("/public-api/listing",controller.PostListings)
 	app.Use(controller.NotFound404)
 
 	err := godotenv.Load()

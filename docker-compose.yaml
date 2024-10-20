@@ -19,8 +19,6 @@ services:
       POSTGRES_PASSWORD: user
     networks:
       - user_network
-    ports:
-      - "9000:5432"
 
   # Listing Database
   listing_db:
@@ -32,8 +30,6 @@ services:
       POSTGRES_PASSWORD: listing
     networks:
       - listing_network
-    ports:
-      - "9001:5432"
 
   # User Service
   user_service:
@@ -51,8 +47,6 @@ services:
     networks:
       - user_network
       - public_network
-    ports:
-      - "8001:8001"
     depends_on:
       - user_db
 
@@ -72,14 +66,12 @@ services:
     networks:
       - listing_network
       - public_network
-    ports:
-      - "8002:8002"
     depends_on:
       - listing_db
 
   # Public Layer Service
   public_layer:
-    image: wisnup001binus/microservice_3service_public_layer:1.0
+    image: wisnup001binus/microservice_3service_public_layer:2.0
     container_name: public_layer_container
     networks:
       - public_network
