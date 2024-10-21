@@ -2,7 +2,7 @@
 A microservice system consisting 3 services: ``public-layer-service``,``user-service`` and ``listing-service``. Build using ``Golang version 1.23.2``,``GORM`` as ORM,``PostgreSQL`` as databases and ``Docker`` for containerization.
 # High Level Overview
 ![img](https://drive.google.com/uc?export=view&id=1-bLq2BL6tLA0KJL7Hf3zGi81_23jdjyu)  
-# Prerequiste
+# Prerequisite
 1. Have ``Golang`` min ``version 1.23.2`` or higher installed on your device
 2. Have ``Docker`` installed on your device
 # Usage
